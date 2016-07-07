@@ -5,6 +5,7 @@ MAINTAINER sparklyballs
 ENV CATALINA_HOME="/var/lib/tomcat8"
 ARG TOMCAT_VERSION_MAJOR="8"
 ARG TOMCAT_VERSION_FULL="8.5.3"
+ARG LIBRE_URL="https://github.com/Libresonic/libresonic/releases/download"
 
 # install runtime packages
 RUN \
@@ -31,6 +32,8 @@ RUN \
 	/app/apache-tomcat-${TOMCAT_VERSION_FULL} /var/lib/tomcat8 && \
 
 # install libresonic
+ LIBRE_VER=$(curl -sX GET  "https://api.github.com/repos/Libresonic/libresonic/releases/latest" | \
+	awk '/tag_name/{print $4;exit}' FS='[""]') && \
  mkdir -p \
 	/var/subsonic/transcode && \
  ln -s \
@@ -39,10 +42,9 @@ RUN \
 	/usr/bin/flac /var/subsonic/transcode/ && \
  ln -s \
 	/usr/bin/lame /var/subsonic/transcode/ && \
- libre_ver=$(curl -sX GET  "https://api.github.com/repos/Libresonic/libresonic/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
  curl -o \
  /var/lib/tomcat8/webapps/libresonic.war -L \
-	https://github.com/Libresonic/libresonic/releases/download/"${libre_ver}"/libresonic-"${libre_ver}".war && \
+	"${LIBRE_URL}"/"${LIBRE_VER}"/libresonic-"${LIBRE_VER}".war && \
 
 # cleanup
  apk del \
