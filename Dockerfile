@@ -35,22 +35,10 @@ RUN \
 	jetty-runner \
 	lame
 
-# config
-RUN \
- mkdir -p \
-	"${LIBRE_SETTINGS}"/transcode && \
- ln -s \
-	/usr/bin/ffmpeg "${LIBRE_SETTINGS}"/transcode/ && \
- ln -s \
-	/usr/bin/flac "${LIBRE_SETTINGS}"/transcode/ && \
- ln -s \
-	/usr/bin/lame "${LIBRE_SETTINGS}"/transcode/
-
-
 # add local files
 COPY root/ /
 
-# ports and volumes
+# ports and volumes, for LIBRE_SETTINGS see top of dockerfile
 EXPOSE 8080
-VOLUME /var/subsonic /music /media
+VOLUME "${LIBRE_SETTINGS}" /podcasts /media /music
 
