@@ -39,9 +39,10 @@ RUN \
 	/usr/bin/flac /var/subsonic/transcode/ && \
  ln -s \
 	/usr/bin/lame /var/subsonic/transcode/ && \
+ libre_ver=$(curl -sX GET  "https://api.github.com/repos/Libresonic/libresonic/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]') && \
  curl -o \
  /var/lib/tomcat8/webapps/libresonic.war -L \
-	https://github.com/Libresonic/libresonic/releases/download/v6.0.1/libresonic-v6.0.1.war && \
+	https://github.com/Libresonic/libresonic/releases/download/"${libre_ver}"/libresonic-"${libre_ver}".war && \
 
 # cleanup
  apk del \
