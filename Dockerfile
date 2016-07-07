@@ -12,7 +12,7 @@ RUN \
  apk add --no-cache \
 	ffmpeg \
 	flac \
-	openjdk8
+	openjdk8-jre
 
 # install build packages
 RUN \
