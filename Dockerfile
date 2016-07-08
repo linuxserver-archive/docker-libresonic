@@ -2,9 +2,10 @@ FROM lsiobase/alpine
 MAINTAINER sparklyballs
 
 # environment settings
-ARG LIBRE_URL="https://github.com/Libresonic/libresonic/releases/download"
+ARG LIBRE_VER="v6.1.beta1"
+ARG LIBRE_WWW="https://github.com/Libresonic/libresonic/releases/download"
 ENV LIBRE_HOME="/app/libresonic"
-ENV LIBRE_SETTINGS="/var/subsonic"
+ENV LIBRE_SETTINGS="/config"
 
 # install build packages
 RUN \
@@ -13,13 +14,11 @@ RUN \
 	tar && \
 
 # install libresonic
- LIBRE_VER=$(curl -sX GET  "https://api.github.com/repos/Libresonic/libresonic/releases/latest" | \
-	awk '/tag_name/{print $4;exit}' FS='[""]') && \
  mkdir -p \
 	"${LIBRE_HOME}" && \
  curl -o \
  "${LIBRE_HOME}"/libresonic.war -L \
-	"${LIBRE_URL}"/"${LIBRE_VER}"/libresonic-"${LIBRE_VER}".war && \
+	"${LIBRE_WWW}"/"${LIBRE_VER}"/libresonic-"${LIBRE_VER}".war && \
 
 # cleanup
  apk del \
@@ -38,7 +37,6 @@ RUN \
 # add local files
 COPY root/ /
 
-# ports and volumes, for LIBRE_SETTINGS see top of dockerfile
+# ports and volumes
 EXPOSE 8080
-VOLUME "${LIBRE_SETTINGS}" /podcasts /media /music
-
+VOLUME /config /media /music /playlists /podcasts

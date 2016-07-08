@@ -1,3 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-s6-setuidgid abc jetty-runner "${LIBRE_HOME}"/libresonic.war
+
+cd "${LIBRE_HOME}"
+
+s6-setuidgid abc \
+java -Dlibresonic.home="${LIBRE_SETTINGS}" \
+-Dlibresonic.defaultMusicFolder=/music \
+-Dlibresonic.defaultPodcastFolder=/podcasts \
+-Dlibresonic.defaultPlaylistFolder=/playlists \
+-jar /usr/share/java/jetty-runner.jar \
+--host 0.0.0.0 libresonic.war
