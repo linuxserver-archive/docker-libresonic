@@ -9,4 +9,4 @@ java -Dlibresonic.home="${LIBRE_SETTINGS}" \
 -Dlibresonic.defaultPodcastFolder=/podcasts \
 -Dlibresonic.defaultPlaylistFolder=/playlists \
 -jar /usr/share/java/jetty-runner.jar \
-libresonic.war
+--host 0.0.0.0 libresonic.war
