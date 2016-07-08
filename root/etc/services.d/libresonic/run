@@ -1,12 +1,18 @@
 #!/usr/bin/with-contenv bash
 
+# strip leading slash if present in set variable
+[[ "$CONTEXT_PATH" ]] && CONTEXT_PATH="${CONTEXT_PATH#/}"
+
+# set url base to / if variable not set, readding leading slash if variable is set.
+URL_BASE="/${CONTEXT_PATH}"
+
 
 cd "${LIBRE_HOME}"
-
 s6-setuidgid abc \
 java -Dlibresonic.home="${LIBRE_SETTINGS}" \
 -Dlibresonic.defaultMusicFolder=/music \
 -Dlibresonic.defaultPodcastFolder=/podcasts \
 -Dlibresonic.defaultPlaylistFolder=/playlists \
 -jar /usr/share/java/jetty-runner.jar \
---host 0.0.0.0 libresonic.war
+--host 0.0.0.0 --port 4040 --path "${URL_BASE}" \
+libresonic.war
