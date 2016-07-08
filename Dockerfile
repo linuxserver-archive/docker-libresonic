@@ -38,5 +38,5 @@ RUN \
 COPY root/ /
 
 # ports and volumes
-EXPOSE 8080
+EXPOSE 4040
 VOLUME /config /media /music /playlists /podcasts
