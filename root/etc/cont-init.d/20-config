@@ -1,13 +1,18 @@
 #!/usr/bin/with-contenv bash
 
+# make transcode folder
 mkdir -p "${LIBRE_SETTINGS}"/transcode
 
+# set symlinks for transcode apps
 if [ ! -e "${LIBRE_SETTINGS}"/transcode/ffmpeg -o "${LIBRE_SETTINGS}"/transcode/flac -o "${LIBRE_SETTINGS}"/transcode/lame  ]; then
 ln -sf /usr/bin/ffmpeg "${LIBRE_SETTINGS}"/transcode/
 ln -sf /usr/bin/flac "${LIBRE_SETTINGS}"/transcode/
 ln -sf /usr/bin/lame "${LIBRE_SETTINGS}"/transcode/
 fi
 
-chown abc:abc /media /music /playlists /podcasts
+# delete database lockfile if it exists
+[[ -e /config/db/libresonic.lck ]] && rm /config/db/libresonic.lck
 
+# permissions
+chown abc:abc /media /music /playlists /podcasts
 chown -R abc:abc /config "${LIBRE_SETTINGS}"  "${LIBRE_HOME}"
