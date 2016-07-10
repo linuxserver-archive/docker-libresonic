@@ -1,4 +1,4 @@
-FROM lsiobase/xenial
+FROM lsiobase/alpine
 MAINTAINER sparklyballs
 
 # copy prebuild files
@@ -9,7 +9,6 @@ ARG JETTY_VER="9.3.10.v20160621"
 ARG LIBRE_VER="v6.1.beta1"
 
 # environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
 ARG JETTY_NAME=jetty-runner
 ARG JETTY_SRC="/tmp/jetty"
 ARG JETTY_URL="https://repo.maven.apache.org/maven2/org/eclipse/jetty"
@@ -21,23 +20,12 @@ ENV LIBRE_SETTINGS="/config"
 
 # install packages
 RUN \
- apt-get update && \
- apt-get install -y \
-	--no-install-recommends \
-	ffmpeg \
-	flac \
-	lame \
-	openjdk-8-jdk && \
-
-# cleanup
- apt-get clean && \
- rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
+ apk add --no-cache --virtual=build-dependencies \
+	curl \
+	openjdk8 \
+	tar && \
 
 # install jetty-runner
-RUN \
  mkdir -p \
 	"${JETTY_SRC}" && \
  cp /prebuilds/* "${JETTY_SRC}"/ && \
@@ -48,16 +36,28 @@ RUN \
  install -m644 -D "$JETTY_NAME-$JETTY_VER.jar" \
 	"/usr/share/java/$JETTY_NAME.jar" || return 1 && \
  install -m755 -D $JETTY_NAME "/usr/bin/$JETTY_NAME" && \
- rm -rf \
-	/tmp/*
 
 # install libresonic
-RUN \
   mkdir -p \
 	"${LIBRE_HOME}" && \
  curl -o \
  "${LIBRE_HOME}"/libresonic.war -L \
-	"${LIBRE_WWW}"
+	"${LIBRE_WWW}" && \
+
+# cleanup
+ apk del --purge \
+	build-dependencies && \
+ rm -rf \
+	/tmp/*
+
+# install runtime packages
+RUN \
+ apk add --no-cache \
+	ffmpeg \
+	flac \
+	lame \
+	openjdk8-jre \
+	ttf-dejavu
 
 # add local files
 COPY root/ /
