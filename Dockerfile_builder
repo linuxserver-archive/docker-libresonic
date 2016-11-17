@@ -3,6 +3,7 @@ MAINTAINER sparklyballs
 
 # environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
+ENV TERM=xterm
 
 # install packages
 RUN \
