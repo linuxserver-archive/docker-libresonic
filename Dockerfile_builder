@@ -1,0 +1,31 @@
+FROM ubuntu:16.04
+MAINTAINER sparklyballs
+
+# environment variables
+ARG DEBIAN_FRONTEND="noninteractive"
+
+# install packages
+RUN \
+ apt-get update && \
+ apt-get install -y \
+	git \
+	maven \
+	openjdk-8-jdk
+
+# clone source
+RUN \
+ git clone git://github.com/Libresonic/libresonic.git /usr/src/libresonic && \
+ cd /usr/src/libresonic && \
+ git checkout develop && \
+
+# build war file
+ mvn package
+
+# copy war file to output folder
+RUN \
+ mkdir -p \
+	/package && \
+ cp /usr/src/libresonic/libresonic-main/target/libresonic.war /package
+
+# Copy war file out to mounted directory
+CMD ["cp", "-avr", "/package", "/mnt/"]
