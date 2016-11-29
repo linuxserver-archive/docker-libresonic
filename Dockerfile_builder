@@ -1,23 +1,24 @@
-FROM ubuntu:16.04
+FROM alpine:3.4
 MAINTAINER sparklyballs
 
 # environment variables
-ARG DEBIAN_FRONTEND="noninteractive"
 ENV TERM=xterm
 
 # install packages
 RUN \
- apt-get update && \
- apt-get install -y \
+ apk add --no-cache  \
+	bash \
 	git \
-	maven \
-	openjdk-8-jdk
+	openjdk8 && \
+ apk add --no-cache \
+	--repository http://nl.alpinelinux.org/alpine/edge/community \
+	maven
 
 # clone source
 RUN \
  git clone git://github.com/Libresonic/libresonic.git /usr/src/libresonic && \
+ git -C /usr/src/libresonic checkout $(git -C /usr/src/libresonic describe --tags --candidates=1 --abbrev=0) && \
  cd /usr/src/libresonic && \
- git checkout develop && \
 
 # build war file
  mvn package
