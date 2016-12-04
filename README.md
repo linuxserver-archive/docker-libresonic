@@ -89,5 +89,6 @@ Default user/pass is admin/admin
 
 ## Versions
 
++ **04.12.16:** Update jetty runner version.
 + **29.11.16:** Switch to building from release tags following v6.1 stable release.
 + **17.11.16:** Initial Release.

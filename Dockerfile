@@ -11,7 +11,7 @@ COPY prebuilds/ /prebuilds/
 COPY package/ /app/libresonic/
 
 # package version settings
-ARG JETTY_VER="9.3.10.v20160621"
+ARG JETTY_VER="9.3.14.v20161028"
 
 # environment settings
 ARG JETTY_NAME=jetty-runner
