@@ -8,6 +8,4 @@ ln -sf /usr/bin/flac "${LIBRE_SETTINGS}"/transcode/
 ln -sf /usr/bin/lame "${LIBRE_SETTINGS}"/transcode/
 fi
 
-chown abc:abc /media /music /playlists /podcasts
-
 chown -R abc:abc /config "${LIBRE_SETTINGS}"  "${LIBRE_HOME}"
