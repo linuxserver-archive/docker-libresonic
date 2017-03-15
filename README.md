@@ -2,6 +2,8 @@
 [forumurl]: https://forum.linuxserver.io
 [ircurl]: https://www.linuxserver.io/irc/
 [podcasturl]: https://www.linuxserver.io/podcast/
+[appurl]: https://github.com/Libresonic/libresonic
+[hub]: https://hub.docker.com/r/linuxserver/libresonic/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -12,13 +14,11 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 # linuxserver/libresonic
 [![](https://images.microbadger.com/badges/version/linuxserver/libresonic.svg)](https://microbadger.com/images/linuxserver/libresonic "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/libresonic.svg)](https://microbadger.com/images/linuxserver/libresonic "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/libresonic.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/libresonic.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-libresonic)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-libresonic/)
-[hub]: https://hub.docker.com/r/linuxserver/libresonic/
 
 
-[Libresonic][libreurl] is a free, web-based media streamer, providing ubiqutious access to your music. Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.
+[Libresonic][appurl] is a free, web-based media streamer, providing ubiqutious access to your music. Use it to share your music with friends, or to listen to your own music while at work. You can stream to multiple players simultaneously, for instance to one player in your kitchen and another in your living room.
 
-[![libresonic](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/libresonic.png)][libreurl]
-[libreurl]: https://github.com/Libresonic/libresonic
+[![libresonic](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/libresonic.png)][appurl]
 
 ## Usage
 
