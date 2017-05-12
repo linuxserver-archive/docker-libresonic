@@ -89,6 +89,7 @@ Default user/pass is admin/admin
 
 ## Versions
 
++ **12.05.17:** Add annotation timeout (primarily for armhf and lower powered hosts).
 + **08.02.17:** Rebase to alpine 3.5
 + **04.12.16:** Update jetty runner version.
 + **29.11.16:** Switch to building from release tags following v6.1 stable release.
