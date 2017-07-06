@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 MAINTAINER sparklyballs
 
 # environment variables
@@ -9,10 +9,8 @@ RUN \
  apk add --no-cache  \
 	bash \
 	git \
-	openjdk8 && \
- apk add --no-cache \
-	--repository http://nl.alpinelinux.org/alpine/edge/community \
-	maven
+	maven \
+	openjdk8
 
 # clone source
 RUN \
@@ -27,7 +25,8 @@ RUN \
 RUN \
  mkdir -p \
 	/package && \
- cp /usr/src/libresonic/libresonic-main/target/libresonic.war /package
+ cp /usr/src/libresonic/libresonic-main/target/libresonic.war /package && \
+ chown -R 1000:1000 /package
 
 # Copy war file out to mounted directory
 CMD ["cp", "-avr", "/package", "/mnt/"]
