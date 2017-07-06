@@ -26,7 +26,7 @@ RUN \
  mkdir -p \
 	/package && \
  cp /usr/src/libresonic/libresonic-main/target/libresonic.war /package && \
- chown -R 1000:1000 /package
+ chmod -R 777 /package
 
 # Copy war file out to mounted directory
 CMD ["cp", "-avr", "/package", "/mnt/"]
