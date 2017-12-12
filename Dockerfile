@@ -1,38 +1,36 @@
-FROM lsiobase/alpine:3.6
-MAINTAINER sparklyballs
+FROM lsiobase/alpine:3.7
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="sparklyballs"
+
+# package versions
+ARG JETTY_VER="9.3.14.v20161028"
+
+# environment settings
+ENV LIBRE_HOME="/app/libresonic" \
+LIBRE_SETTINGS="/config"
 
 # copy prebuild and war files
 COPY prebuilds/ /prebuilds/
 COPY package/ /app/libresonic/
 
-# package version settings
-ARG JETTY_VER="9.3.14.v20161028"
-
-# environment settings
-ENV LIBRE_HOME="/app/libresonic"
-ENV LIBRE_SETTINGS="/config"
-
-# install build packages
 RUN \
+ echo "**** install build packages ****" && \
  apk add --no-cache --virtual=build-dependencies \
 	curl \
 	openjdk8 \
 	tar && \
-
-# install runtime packages
+ echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	ffmpeg \
 	flac \
 	lame \
 	openjdk8-jre \
 	ttf-dejavu && \
-
-# install jetty-runner
+ echo "**** install jetty-runner ****" && \
  mkdir -p \
 	/tmp/jetty && \
  cp /prebuilds/* /tmp/jetty/ && \
@@ -43,8 +41,7 @@ RUN \
  install -m644 -D "jetty-runner-$JETTY_VER.jar" \
 	/usr/share/java/jetty-runner.jar && \
  install -m755 -D jetty-runner /usr/bin/jetty-runner && \
-
-# cleanup
+ echo "**** cleanup ****" && \
  apk del --purge \
 	build-dependencies && \
  rm -rf \
