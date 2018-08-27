@@ -55,7 +55,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e CONTEXT_PATH` for setting url-base in reverse proxy setups - *optional*
 * `-e TZ` for setting timezone information, eg Europe/London
 
-It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it libresonic /bin/bash`.
+It is based on ubuntu bionic  with s6 overlay, for shell access whilst the container is running do `docker exec -it libresonic /bin/bash`.
 
 ### User / Group Identifiers
 
@@ -88,6 +88,7 @@ Default user/pass is admin/admin
 
 ## Versions
 
++ **27.08.18:** Rebase to ubuntu bionic.
 + **12.12.17:** Rebase to alpine 3.7.
 + **11.07.17:** Rebase to alpine 3.6.
 + **12.05.17:** Add annotation timeout (primarily for armhf and lower powered hosts).

@@ -6,18 +6,16 @@
 # set url base to / if variable not set, readding leading slash if variable is set.
 URL_BASE="/${CONTEXT_PATH}"
 
-# default value for annotation timeout in seconds.
-MAX_WAIT=${MAX_WAIT:-1800}
-
 cd "${LIBRE_HOME}" || exit
-
 exec \
 	s6-setuidgid abc \
-	java -Dorg.eclipse.jetty.annotations.maxWait="${MAX_WAIT}" \
+	java \
 	-Dlibresonic.home="${LIBRE_SETTINGS}" \
 	-Dlibresonic.defaultMusicFolder=/music \
 	-Dlibresonic.defaultPodcastFolder=/podcasts \
 	-Dlibresonic.defaultPlaylistFolder=/playlists \
-	-jar /usr/share/java/jetty-runner.jar \
-	--host 0.0.0.0 --port 4040 --path "${URL_BASE}" \
-	libresonic.war
+	-Dserver.contextPath="${URL_BASE}" \
+	-Dserver.host=0.0.0.0 \
+	-Dserver.port=4040 \
+	"${RUN_ARRAY[@]}" \
+	-jar libresonic.war
