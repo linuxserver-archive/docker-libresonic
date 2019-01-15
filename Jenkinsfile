@@ -20,7 +20,7 @@ pipeline {
     DOCKERHUB_IMAGE = 'linuxserver/libresonic'
     DEV_DOCKERHUB_IMAGE = 'lsiodev/libresonic'
     PR_DOCKERHUB_IMAGE = 'lspipepr/libresonic'
-    DIST_IMAGE = 'alpine'
+    DIST_IMAGE = 'ubuntu'
     MULTIARCH='true'
     CI='true'
     CI_WEB='true'
