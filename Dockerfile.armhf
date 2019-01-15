@@ -26,7 +26,7 @@ RUN \
 	/usr/src/libresonic/ --strip-components=1 && \
  cd /usr/src/libresonic && \
  echo "**** build war file ****" && \
- mvn package
+ mvn -q package
 
 # Main Container
 FROM lsiobase/java.armhf:bionic
