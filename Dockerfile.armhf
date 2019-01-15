@@ -29,7 +29,7 @@ RUN \
  mvn package
 
 # Main Container
-FROM lsiobase/java:bionic
+FROM lsiobase/java.armhf:bionic
 
 # set version label
 ARG BUILD_DATE
