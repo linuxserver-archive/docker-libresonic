@@ -88,7 +88,7 @@ Default user/pass is admin/admin
 
 ## Versions
 
-+ **05.01.19:** Move to multi stage build, adding pipeline multi arch builds.
++ **15.01.19:** Pull war from github, adding pipeline multi arch builds.
 + **05.01.19:** Linting fixes.
 + **27.08.18:** Rebase to ubuntu bionic.
 + **12.12.17:** Rebase to alpine 3.7.
