@@ -1,0 +1,29 @@
+---
+
+# jenkins variables
+project_name: docker-libresonic
+external_type: github_stable
+release_type: stable
+release_tag: latest
+ls_branch: master
+repo_vars:
+  - EXT_GIT_BRANCH = 'master'
+  - EXT_USER = 'Libresonic'
+  - EXT_REPO = 'libresonic'
+  - BUILD_VERSION_ARG = 'LIBRESONIC_RELEASE'
+  - LS_USER = 'linuxserver'
+  - LS_REPO = 'docker-libresonic'
+  - CONTAINER_NAME = 'libresonic'
+  - DOCKERHUB_IMAGE = 'linuxserver/libresonic'
+  - DEV_DOCKERHUB_IMAGE = 'lsiodev/libresonic'
+  - PR_DOCKERHUB_IMAGE = 'lspipepr/libresonic'
+  - DIST_IMAGE = 'ubuntu'
+  - MULTIARCH='true'
+  - CI='true'
+  - CI_WEB='true'
+  - CI_PORT='4040'
+  - CI_SSL='false'
+  - CI_DELAY='360'
+  - CI_DOCKERENV='TZ=US/Pacific'
+  - CI_AUTH='user:password'
+  - CI_WEBPATH=''

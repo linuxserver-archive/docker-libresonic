@@ -38,7 +38,7 @@ linuxserver/libresonic
 
 ## Parameters
 
-`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side. 
+`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side.
 For example with a port -p external:internal - what this shows is the port mapping from internal to external of the container.
 So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
 http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
@@ -78,7 +78,7 @@ Default user/pass is admin/admin
 
 * To monitor the logs of the container in realtime `docker logs -f libresonic`.
 
-* container version number 
+* container version number
 
 `docker inspect -f '{{ index .Config.Labels "build_version" }}' libresonic`
 
@@ -88,6 +88,7 @@ Default user/pass is admin/admin
 
 ## Versions
 
++ **15.01.19:** Pull war from github, adding pipeline multi arch builds.
 + **05.01.19:** Linting fixes.
 + **27.08.18:** Rebase to ubuntu bionic.
 + **12.12.17:** Rebase to alpine 3.7.
