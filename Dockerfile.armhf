@@ -9,7 +9,8 @@ LABEL maintainer="sparklyballs, thelamer"
 
 # environment settings
 ENV LIBRE_HOME="/app/libresonic" \
-LIBRE_SETTINGS="/config"
+LIBRE_SETTINGS="/config" \
+LANG="C.UTF-8"
 
 RUN \
  echo "**** install runtime packages ****" && \
