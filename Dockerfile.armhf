@@ -1,7 +1,4 @@
-FROM lsiobase/java.armhf:bionic
-
-# Add qemu to build on x86_64 systems
-COPY qemu-arm-static /usr/bin
+FROM lsiobase/ubuntu:arm32v7-bionic
 
 # set version label
 ARG BUILD_DATE
@@ -14,8 +11,21 @@ LABEL maintainer="sparklyballs, thelamer"
 ENV LIBRE_HOME="/app/libresonic" \
 LIBRE_SETTINGS="/config"
 
-# Install War File
 RUN \
+ echo "**** install runtime packages ****" && \
+ apt-get update && \
+ apt-get install -y \
+	--no-install-recommends \
+	ca-certificates \
+	ffmpeg \
+	flac \
+	fontconfig \
+	lame \
+	openjdk-8-jre-headless \
+	ttf-dejavu && \
+ echo "**** fix XXXsonic status page ****" && \
+ find /etc -name "accessibility.properties" -exec rm -fv '{}' + && \
+ find /usr -name "accessibility.properties" -exec rm -fv '{}' + && \
  echo "**** Get War ****" && \
  if [ -z ${LIBRESONIC_RELEASE+x} ]; then \
         LIBRESONIC_RELEASE=$(curl -sX GET "https://api.github.com/repos/Libresonic/libresonic/releases/latest" \
@@ -25,7 +35,6 @@ RUN \
  curl -o \
         /app/libresonic/libresonic.war -L \
         "https://github.com/Libresonic/libresonic/releases/download/${LIBRESONIC_RELEASE}/libresonic-${LIBRESONIC_RELEASE}.war"
-
 
 # add local files
 COPY root/ /
